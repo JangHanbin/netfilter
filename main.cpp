@@ -3,7 +3,7 @@
 #include <linux/netfilter.h>
 #include <errno.h>
 #include <libnetfilter_queue/libnetfilter_queue.h>
-#include <arpa/inet.h>
+#include <netinet/in.h>
 
 using namespace std;
 
