@@ -3,6 +3,7 @@
 #include <linux/netfilter.h>
 #include <errno.h>
 #include <libnetfilter_queue/libnetfilter_queue.h>
+#include <arpa/inet.h>
 
 using namespace std;
 
@@ -55,7 +56,7 @@ void getError(string error)
     exit(1);
 }
 
-static u_int32_t checkPacket(nfq_data *tb, int &flag, void* data)
+static u_int32_t checkPacket(nfq_data *tb, int &flag)
 {
     int id = 0;
     struct nfqnl_msg_packet_hdr *ph;
