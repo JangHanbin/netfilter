@@ -1,9 +1,9 @@
 #include <iostream>
+#include <netinet/in.h>
 #include <linux/types.h>
 #include <linux/netfilter.h>
 #include <errno.h>
 #include <libnetfilter_queue/libnetfilter_queue.h>
-#include <netinet/in.h>
 
 using namespace std;
 
