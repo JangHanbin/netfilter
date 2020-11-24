@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
         getError("error during nfq_bind_pf()");
 
     /*binding this socket to queue '0'*/
-    struct nfq_q_handle* qhandle=nfq_create_queue(handle,0,&callback,&parse);
+    struct nfq_q_handle* qhandle=nfq_create_queue(handle,0,&callback,0); //you can give user defined parameter at last parameter. (e.g., nfq_create_queue(handle,0,&callback,&userClass);)
     if(!qhandle)
         getError("error during nfq_create_queue()");
 
@@ -55,7 +55,7 @@ void getError(string error)
     exit(1);
 }
 
-static u_int32_t checkPacket(nfq_data *tb, int &flag)
+static u_int32_t checkPacket(nfq_data *tb, int &flag, void* data)
 {
     int id = 0;
     struct nfqnl_msg_packet_hdr *ph;
@@ -84,7 +84,7 @@ static int callback(nfq_q_handle *qhandle, nfgenmsg *nfmsg, nfq_data *nfa, void 
     (void)nfmsg;
 
     int flag=0;
-    u_int32_t id = checkPacket(nfa,flag,(Parse*)data); //call another method
+    u_int32_t id = checkPacket(nfa,flag, data); //call another method
     return nfq_set_verdict(qhandle, id, flag, 0, NULL); //decide Drop or Accept
 }
 
