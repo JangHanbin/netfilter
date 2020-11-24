@@ -85,7 +85,7 @@ static int callback(nfq_q_handle *qhandle, nfgenmsg *nfmsg, nfq_data *nfa, void 
     (void)nfmsg;
 
     int flag=0;
-    u_int32_t id = checkPacket(nfa,flag, data); //call another method
+    u_int32_t id = checkPacket(nfa,flag); //call another method
     return nfq_set_verdict(qhandle, id, flag, 0, NULL); //decide Drop or Accept
 }
 
